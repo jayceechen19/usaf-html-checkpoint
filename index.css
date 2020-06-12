@@ -9,8 +9,14 @@ row {
 .navbar {
     margin-bottom: 10px;
 }
-/* #searchButton {
+.btn-dark {
     border-color: orange;
     color:orange;
-    background-color: dimgray;
-} */
+    background-color: #343a40;
+} 
+#toResults
+{
+    background-color: #6c757d;
+    color: orange;
+    text-align: left;
+}
