@@ -1,0 +1,11 @@
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+row {
+    padding: 100px;
+}
+.navbar {
+    margin-bottom: 0px;
+}
