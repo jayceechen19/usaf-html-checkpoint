@@ -27,27 +27,53 @@ var MOVIE_DATABASE = [
         release: 2019,
         actors: "Dean-Charles Chapman, George MacKay, Daniel Mays",
         description: "April 6th, 1917. As a regiment assembles to wage war deep in enemy territory, two soldiers are assigned to race against time and deliver a message that will stop 1,600 men from walking straight into a deadly trap."
+    },
+    {
+        image: 'Parasite.jpg',
+        title: 'Parasite',
+        release: 2019,
+        actors: 'Kang-ho Song, Sun-kyun Lee, Yeo-jeong Jo',
+        description: 'Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.'
     }
 ]
 
 document.addEventListener('DOMContentLoaded',function(){
     
-    var imgButton = document.getElementById('toComments')
-    imgButton.addEventListener('click', function(){
-        window.location.href='comments.html';
-    }) 
-
-
     var searchButton = document.getElementById('searchButton')
-    var search
-    
+    var searchbar = document.getElementById('searchBar')
+    var search = searchbar.textContent.toLowerCase();
+    var searchResults = []
+
+    if (search === ''){
+        for(var i=0; i<MOVIE_DATABASE.length; i++){
+            //Every third child, create a row
+            if (i % 4 === 0){
+                var row = document.createElement('row')
+                row.className = 'container-fixed row'
+                document.body.appendChild(row)
+            }
+
+            var div = document.createElement('div')
+            div.className = 'col-md-3'
+
+            var movie = document.createElement('img')
+            movie.src = MOVIE_DATABASE[i].image
+            movie.id = 'movie'
+
+            movie.addEventListener('click', function(){
+                window.location.href='comments.html';
+            }) 
+            row.appendChild(div)
+            div.appendChild(movie)
+        }
+    }
+
     searchButton.addEventListener('click', function(){
-
-        var searchBar = document.getElementById('searchBar')
-        let value = searchBar.nodeValue.toLowerCase();
-        console.log(value)
-
-
-        window.location.href='comments.html';    
+        for(var i=0; i<MOVIE_DATABASE.length; i++){
+            if (MOVIE_DATABASE[i].name.includes(search)){
+                
+            }
+        }
     })
+    
 })
