@@ -38,40 +38,72 @@ var MOVIE_DATABASE = [
 ]
 
 document.addEventListener('DOMContentLoaded',function(){
-    
-    var searchButton = document.getElementById('searchButton')
-    var searchbar = document.getElementById('searchBar')
-    var search = searchbar.textContent.toLowerCase();
-    var searchResults = []
 
-    if (search === ''){
-        for(var i=0; i<MOVIE_DATABASE.length; i++){
-            //Every third child, create a row
-            if (i % 4 === 0){
-                var row = document.createElement('row')
-                row.className = 'container-fixed row'
-                document.body.appendChild(row)
-            }
-
-            var div = document.createElement('div')
-            div.className = 'col-md-3'
-
-            var movie = document.createElement('img')
-            movie.src = MOVIE_DATABASE[i].image
-            movie.id = 'movie'
-
-            movie.addEventListener('click', function(){
-                window.location.href='comments.html';
-            }) 
-            row.appendChild(div)
-            div.appendChild(movie)
+    //Loading all the movies in the database
+    for(var i=0; i<MOVIE_DATABASE.length; i++){
+        //Every third child, create a row
+        if (i % 4 === 0){
+            var row = document.createElement('row')
+            row.className = 'container-fixed row'
+            document.body.appendChild(row)
         }
+
+        var div = document.createElement('div')
+        div.className = 'col-md-3'
+
+        var movie = document.createElement('img')
+        movie.src = MOVIE_DATABASE[i].image
+        movie.id = 'movie'
+
+        movie.addEventListener('click', function(){
+            window.location.href='comments.html';
+        }) 
+        row.appendChild(div)
+        div.appendChild(movie)
     }
 
-    searchButton.addEventListener('click', function(){
-        for(var i=0; i<MOVIE_DATABASE.length; i++){
-            if (MOVIE_DATABASE[i].name.includes(search)){
-                
+    var searchbar = document.getElementById('searchBar')
+
+    searchbar.addEventListener('input', function (){
+        if (search !== ""){
+            var searchResults = []
+            var search = searchbar.value.toLowerCase();
+
+            //Clears the page
+            var rows = document.querySelectorAll(".row")
+            for (var i=0; i<rows.length; i++){
+                document.body.removeChild(rows[i])
+            }
+            
+            //Finding what matches the search criteria
+            for(var i=0; i<MOVIE_DATABASE.length; i++){
+                console.log(search)
+                if (MOVIE_DATABASE[i].title.toLowerCase().includes(search)){
+                    searchResults.push(MOVIE_DATABASE[i])
+                }
+            }
+            
+            //Load the search results
+            for(var i=0; i<searchResults.length; i++){
+                //Every fourth child, create a row
+                if (i % 4 === 0){
+                    var row = document.createElement('row')
+                    row.className = 'container-fixed row'
+                    document.body.appendChild(row)
+                }
+    
+                var div = document.createElement('div')
+                div.className = 'col-md-3'
+    
+                var movie = document.createElement('img')
+                movie.src = searchResults[i].image
+                movie.id = 'movie'
+    
+                movie.addEventListener('click', function(){
+                    window.location.href='comments.html';
+                }) 
+                row.appendChild(div)
+                div.appendChild(movie)
             }
         }
     })
