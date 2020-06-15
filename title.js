@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 movie.id = 'movie'
     
                 movie.addEventListener('click', function(){
-                    window.location.href='comments.html';
+                    window.location.href=`${movie.title}.html`;
                 }) 
                 row.appendChild(div)
                 div.appendChild(movie)
